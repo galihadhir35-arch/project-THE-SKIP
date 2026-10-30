@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" role="img" aria-label="Sisi belakang kaos dengan sablon jadwal tur">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EEF1F5"/>
+      <stop offset="1" stop-color="#E2E7EE"/>
+    </linearGradient>
+    <linearGradient id="fabric2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2A2F34"/>
+      <stop offset="0.55" stop-color="#1C1E21"/>
+      <stop offset="1" stop-color="#14161A"/>
+    </linearGradient>
+    <clipPath id="teeClip2">
+      <path d="M300 190 C300 158 320 146 342 152 L458 152 C480 146 500 158 500 190 L576 232 C596 244 604 264 600 286 L586 372 C583 390 566 400 548 396 L508 386 L508 606 C508 648 476 674 438 674 L362 674 C324 674 292 648 292 606 L292 386 L252 396 C234 400 217 390 214 372 L200 286 C196 264 204 244 224 232 Z"/>
+    </clipPath>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg2)"/>
+  <ellipse cx="400" cy="686" rx="250" ry="34" fill="#0A1317" opacity="0.08"/>
+  <path d="M300 190 C300 158 320 146 342 152 L458 152 C480 146 500 158 500 190 L576 232 C596 244 604 264 600 286 L586 372 C583 390 566 400 548 396 L508 386 L508 606 C508 648 476 674 438 674 L362 674 C324 674 292 648 292 606 L292 386 L252 396 C234 400 217 390 214 372 L200 286 C196 264 204 244 224 232 Z" fill="url(#fabric2)"/>
+  <g clip-path="url(#teeClip2)">
+    <path d="M342 152 C368 196 432 196 458 152 L458 176 C430 210 370 210 342 176 Z" fill="#0A1317" opacity="0.55"/>
+  </g>
+  <g transform="translate(400 400)" text-anchor="middle" font-family="Montserrat, Helvetica, Arial, sans-serif">
+    <text y="-58" fill="#F1F4F7" font-size="34" font-weight="800" letter-spacing="6">TOUR 2026</text>
+    <line x1="-96" y1="-38" x2="96" y2="-38" stroke="#9EC5FF" stroke-width="2"/>
+    <g fill="#B9C2CC" font-size="16" letter-spacing="3">
+      <text y="-8">JAKARTA · 03.14</text>
+      <text y="20">BANDUNG · 03.21</text>
+      <text y="48">SURABAYA · 03.28</text>
+      <text y="76">YOGYAKARTA · 04.04</text>
+    </g>
+  </g>
+</svg>
