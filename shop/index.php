@@ -17,7 +17,7 @@ include "../includes/header.php";
     <div class="catalog-toolbar">
       <div class="search-field">
         <span class="search-field__icon" aria-hidden="true"><?= icon('search') ?></span>
-        <input type="search" id="search-input" placeholder="Cari produk, kategori…" class="form-control" aria-label="Cari produk">
+        <input type="search" id="search-input" placeholder="Cari produk…" class="form-control" aria-label="Cari produk">
       </div>
       <div class="filter-chips" role="group" aria-label="Filter kategori">
         <button class="filter-chip active" data-category="all">Semua</button>

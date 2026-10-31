@@ -117,7 +117,7 @@ include "../includes/header.php";
 
             <div class="form-group">
               <label for="custom-notes">Catatan untuk Admin</label>
-              <textarea id="custom-notes" rows="4" class="form-control" placeholder="Contoh: letakkan di dada kiri, warna cerah, tambahkan teks tur 2026…"></textarea>
+              <textarea id="custom-notes" rows="4" class="form-control" placeholder="Contoh: letakkan di dada kiri, warna cerah, teks tur 2026"></textarea>
             </div>
           </section>
 

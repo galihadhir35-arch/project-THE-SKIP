@@ -1263,7 +1263,7 @@ tr:last-child td { border-bottom: none; }
 .cart-item__title:hover { color: var(--color-primary); }
 .cart-item__unit { font-size: 0.875rem; color: var(--color-text-muted); margin: 0.2rem 0; }
 .cart-item__qty { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
-.cart-item__info { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.cart-item__info { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-width: 0; }
 .cart-item__total { font-weight: 800; min-width: 110px; text-align: right; }
 
 /* ---------- Checkout ---------- */
@@ -1617,21 +1617,46 @@ table.admin-table,
   }
   .filter-chip { flex: 0 0 auto; }
   .form-row { grid-template-columns: 1fr; }
+  /* Kartu keranjang (ponsel): baris 1 = gambar + info, baris 2 = qty + total.
+     Kolom ke-3 "auto" memberi ruang untuk total tanpa menjepit qty. */
   .cart-item {
-    grid-template-columns: 64px minmax(0, 1fr);
+    grid-template-columns: 64px minmax(0, 1fr) auto;
     grid-template-areas:
-      "media info"
-      "qty total";
+      "media info  info"
+      "qty   qty   total";
     align-items: start;
     gap: var(--spacing-s);
     padding: var(--spacing-s);
   }
+  .cart-item:hover { transform: none; box-shadow: none; }
   .cart-item__media { grid-area: media; width: 64px; height: 64px; }
-  .cart-item__info { grid-area: info; }
-  .cart-item__qty { grid-area: qty; flex-direction: row; gap: 0.25rem; align-items: center; justify-content: flex-start; }
-  .cart-item__total { grid-area: total; align-self: center; text-align: right; min-width: 0; font-size: 0.875rem; overflow-wrap: anywhere; }
+  .cart-item { row-gap: 0; }
+  .cart-item__media, .cart-item__info { margin-bottom: var(--spacing-s); }
+  .cart-item__info { grid-area: info; align-items: flex-start; justify-content: flex-start; }
+  .cart-item__info .muted { margin: 0; font-size: 0.8125rem; }
+  .cart-item__info .link-danger { margin-top: 0.35rem; padding: 0.25rem 0; }
+  .cart-item__qty {
+    grid-area: qty;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: var(--spacing-s);
+  }
+  .cart-item__qty .muted { font-size: 0.75rem; white-space: nowrap; }
+  .cart-item__total {
+    grid-area: total;
+    align-self: end;
+    text-align: right;
+    min-width: 0;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
   .cart-item__unit { font-size: 0.8rem; }
   .cart-item__title { font-size: 0.95rem; }
+  .qty-control input { width: 44px; }
+  .qty-btn { width: 40px; }
   .request-card, .admin-request { grid-template-columns: 1fr; }
   .request-card__preview, .admin-request__preview { min-height: 160px; }
   .review-layout { grid-template-columns: 1fr; }
@@ -1751,8 +1776,14 @@ table.admin-table,
   .stat-grid { grid-template-columns: 1fr; }
   .cart-badge { padding-right: 0; }
   .hero h1 { font-size: 28px; }
-  .cart-item { grid-template-columns: 56px minmax(0,1fr); }
+  .cart-item { grid-template-columns: 56px minmax(0,1fr) auto; }
   .cart-item__media { width: 56px; height: 56px; }
+  /* Header sempit: cegah logo / keranjang / burger turun baris */
+  .navbar { flex-wrap: nowrap; gap: 0.25rem; }
+  .brand { gap: 0.35rem; min-width: 0; font-size: 1.15rem; white-space: nowrap; }
+  .brand__sub { font-size: 0.6rem; letter-spacing: 0.1em; }
+  .burger { flex: 0 0 auto; margin-left: 0.25rem; }
+  .nav-actions { flex: 0 0 auto; }
 }
 
 
@@ -1870,10 +1901,14 @@ table.admin-table,
 
 /* Ringkasan keranjang & checkout */
 #cart-items img { max-width: 100%; height: auto; }
-#cart-items * { overflow-wrap: anywhere; }
+#cart-items * { overflow-wrap: break-word; }
+#cart-items .qty-control input { overflow-wrap: normal; }
 .summary-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .summary-row > span:last-child,
 .summary-row > strong { text-align: right; }
+.summary-row--total > strong { white-space: nowrap; }
+.summary-row--total > span:first-child { min-width: 0; }
+@media (max-width: 360px) { .summary-row--total > strong { font-size: 1.1rem; } }
 
 /* Studio */
 .studio-mockup { position: relative; width: 100%; max-width: 100%; overflow: hidden; }
@@ -1919,4 +1954,84 @@ textarea.form-control { resize: vertical; }
   #custom-request-list .btn-group { flex-direction: column; }
   #custom-request-list .form-actions .btn,
   #custom-request-list .btn-group .btn { width: 100%; }
+}
+
+
+/* ==========================================================================
+   Perbaikan layout ponsel (putaran 2)
+   ========================================================================== */
+
+/* Textarea: .form-control memaksa tinggi tetap sehingga atribut rows diabaikan */
+textarea.form-control {
+  height: auto;
+  min-height: 6.5rem;
+  padding: 0.7rem 1rem;
+  line-height: 1.5;
+}
+
+/* Select: teks panjang dipotong dengan elipsis, bukan terpenggal di tepi */
+select.form-control {
+  width: 100%;
+  text-overflow: ellipsis;
+  padding-right: 2rem;
+}
+
+/* Kotak estimasi: label boleh membungkus, harga tidak pernah terpecah */
+.estimate-box > div { align-items: baseline; }
+.estimate-box > div > span:first-child { flex: 1 1 auto; min-width: 0; }
+.estimate-box > div > strong { flex: 0 0 auto; white-space: nowrap; text-align: right; }
+
+@media (max-width: 767px) {
+  /* Kartu produk di grid 2 kolom: padding lebih rapat agar tombol & stok muat */
+  .product-card .card__body { padding: var(--spacing-s) 0.75rem 0; }
+  .product-card .card__actions { padding: 0.75rem; }
+  .product-card .card__title { font-size: 0.95rem; min-height: 2.6em; }
+  .product-card .card__price { font-size: 1.05rem; margin-bottom: 0.35rem; }
+  .product-card .card__stock { display: block; font-size: 0.8125rem; white-space: nowrap; }
+  .product-card .card__actions .btn {
+    padding: 0 0.5rem;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+  .estimate-box > div { gap: 0.75rem; }
+}
+
+@media (max-width: 400px) {
+  /* Label tombol kartu boleh dua baris rapi pada layar sangat sempit */
+  .product-card .card__actions .btn {
+    white-space: normal;
+    line-height: 1.15;
+    text-align: center;
+    padding: 0 0.35rem;
+  }
+  /* Kolom pencarian + urutan: beri ruang lebih untuk placeholder */
+  .catalog-toolbar { grid-template-columns: minmax(0, 1fr) minmax(112px, 124px); gap: 0.5rem; }
+  .search-field input { padding-left: 2.25rem; padding-right: 0.5rem; }
+  .search-field__icon { left: 0.7rem; }
+  .sort-field select { padding-left: 0.6rem; padding-right: 1.6rem; }
+}
+
+@media (max-width: 640px) {
+  /* Stepper Custom Studio: label panjang membungkus, tidak menimpa kolom sebelah */
+  .studio-stepper__step { white-space: normal; flex: 1 1 auto; }
+  .studio-stepper__label { overflow-wrap: break-word; }
+}
+
+@media (max-width: 767px) {
+  /* Tabel admin → kartu: hilangkan panel pembungkus agar kartu memakai lebar penuh */
+  .panel:has(> .table-wrap:only-child) {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  /* Badge di sel tabel tidak boleh melar selebar kolom grid; boleh membungkus */
+  .table-wrap td .badge,
+  .table-wrap td .status-pill {
+    justify-self: end;
+    height: auto;
+    min-height: 26px;
+    padding: 0.2rem 0.75rem;
+    text-align: right;
+    line-height: 1.25;
+  }
 }
