@@ -1,5 +1,6 @@
 <?php
 $pageTitle = 'Daftar Akun';
+$activeNav = 'auth';
 include "includes/header.php";
 ?>
 

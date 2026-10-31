@@ -53,7 +53,7 @@ include "../includes/header.php";
             <span class="badge badge--neutral">Indikatif</span>
           </div>
           <div class="mockup studio-mockup">
-            <img id="mockup-base" class="mockup__base" src="<?= asset_url('images/products/tshirt-classic.jpg') ?>" alt="Mockup produk" onerror="this.src='<?= asset_url('images/products/placeholder.svg') ?>'">
+            <img id="mockup-base" class="mockup__base" src="<?= asset_url('images/products/custom tshirt.jpg') ?>" alt="Mockup kaos custom" onerror="this.src='<?= asset_url('images/products/placeholder.svg') ?>'">
             <img id="mockup-art" class="mockup__art" src="" alt="Preview desain" hidden>
             <div class="mockup__empty" id="mockup-empty">Desain akan tampil di area cetak setelah diunggah</div>
           </div>

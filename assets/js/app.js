@@ -1692,18 +1692,18 @@ function initCustomStudio() {
   }
   if (dropZone) {
     ["dragenter", "dragover"].forEach((evt) => {
-      dropZone.addEventListener(evt, (e) => {
+      bind(dropZone, evt, (e) => {
         e.preventDefault();
         dropZone.classList.add("is-dragover");
       });
     });
     ["dragleave", "drop"].forEach((evt) => {
-      dropZone.addEventListener(evt, (e) => {
+      bind(dropZone, evt, (e) => {
         e.preventDefault();
         dropZone.classList.remove("is-dragover");
       });
     });
-    dropZone.addEventListener("drop", (e) => {
+    bind(dropZone, "drop", (e) => {
       handleDesignFile(e.dataTransfer.files[0]);
     });
   }

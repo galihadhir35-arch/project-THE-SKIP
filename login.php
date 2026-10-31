@@ -1,5 +1,6 @@
 <?php
 $pageTitle = 'Masuk';
+$activeNav = 'auth';
 include "includes/header.php";
 ?>
 

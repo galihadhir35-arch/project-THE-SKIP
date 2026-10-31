@@ -110,8 +110,8 @@ Validasi form: jQuery (wajib isi, pesan error alert)
 ## 6. Riwayat Pesanan — `orders/index.php`
 
 ```
-H1 Pesanan Saya
-TABEL: Kode | Tanggal | Tipe | Total | Status bayar | Status | [Detail]
+H1 Pesanan Saya [filter status]
+Daftar kartu per pesanan: kode, tanggal, tipe, total, status bayar + status, [Detail]
 (kosong) -> empty state
 ```
 

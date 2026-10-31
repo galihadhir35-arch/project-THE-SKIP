@@ -18,6 +18,13 @@ include "../includes/admin_nav.php";
       <button class="btn btn--primary btn--sm" id="btn-add-product" type="button">+ Tambah Produk</button>
     </div>
 
+    <div class="toolbar">
+      <div class="search-field">
+        <span class="search-field__icon" aria-hidden="true"><?= icon('search') ?></span>
+        <input type="search" id="admin-product-search" class="form-control" placeholder="Cari produk, kategori, tipe…" aria-label="Cari produk">
+      </div>
+    </div>
+
     <div class="panel">
       <div class="table-wrap">
         <table class="admin-table">

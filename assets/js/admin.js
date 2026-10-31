@@ -254,7 +254,7 @@ function openProductModal(product) {
     tbody.appendChild(tr);
   });
 
-  form.addEventListener("submit", (e) => {
+  jQuery(form).on("submit", (e) => {
     e.preventDefault();
     const base = existing || {
       id: uid("p"),
@@ -315,8 +315,19 @@ function initAdminProducts() {
   const body = $("#admin-products-body");
   if (!body) return;
 
+  const search = $("#admin-product-search");
+
   function render() {
-    const products = Store.allProducts().sort((a, b) => a.name.localeCompare(b.name));
+    const term = (search ? search.value : "").trim().toLowerCase();
+    let products = Store.allProducts().sort((a, b) => a.name.localeCompare(b.name));
+    if (term) {
+      products = products.filter((p) =>
+        [p.name, p.slug, p.category, p.product_type === "custom_base" ? "custom base" : "official"]
+          .join(" ")
+          .toLowerCase()
+          .includes(term)
+      );
+    }
     body.innerHTML = products.length
       ? products
           .map(
@@ -336,12 +347,13 @@ function initAdminProducts() {
             </tr>`
           )
           .join("")
-      : adminTableEmpty(8, "Belum ada produk.");
+      : adminTableEmpty(8, term ? "Tidak ada produk yang cocok dengan pencarian." : "Belum ada produk.");
   }
 
   jQuery("#btn-add-product").on("click", () => openProductModal(null));
+  if (search) jQuery(search).on("input", render);
 
-  body.addEventListener("click", (e) => {
+  jQuery(body).on("click", (e) => {
     const editBtn = e.target.closest("[data-edit]");
     if (editBtn) {
       openProductModal(Store.getProduct(editBtn.dataset.edit));
@@ -433,9 +445,9 @@ function initAdminOrders() {
       : adminTableEmpty(8, "Tidak ada pesanan pada filter ini.");
   }
 
-  if (filter) filter.addEventListener("change", render);
+  if (filter) jQuery(filter).on("change", render);
 
-  body.addEventListener("click", (e) => {
+  jQuery(body).on("click", (e) => {
     const btn = e.target.closest("[data-manage]");
     if (!btn) return;
     const order = Store.findOrder(btn.dataset.manage);
@@ -592,9 +604,9 @@ function initAdminCustomRequests() {
       : emptyState("palette", "Tidak ada custom request", "Belum ada permintaan pada filter ini.");
   }
 
-  if (filter) filter.addEventListener("change", render);
+  if (filter) jQuery(filter).on("change", render);
 
-  root.addEventListener("click", (e) => {
+  jQuery(root).on("click", (e) => {
     const btn = e.target.closest("[data-review]");
     if (!btn) return;
     const request = Store.findRequest(btn.dataset.review);
@@ -698,7 +710,7 @@ function initAdminPayments() {
       </section>`;
   }
 
-  root.addEventListener("click", (e) => {
+  jQuery(root).on("click", (e) => {
     const proofBtn = e.target.closest("[data-proof]");
     if (proofBtn) {
       const order = Store.findOrder(proofBtn.dataset.proof);
@@ -856,7 +868,7 @@ function initAdminShipping() {
     });
   });
 
-  body.addEventListener("click", (e) => {
+  jQuery(body).on("click", (e) => {
     const editBtn = e.target.closest("[data-edit-rate]");
     if (editBtn) {
       const rate = Store.findShippingRate(editBtn.dataset.editRate);
@@ -927,7 +939,7 @@ function initResponsiveTableLabels() {
 /* ---------- Init ---------- */
 /* Inisialisasi semua halaman admin setelah memuat: guard role, badge, dan
    pemicu modul yang ada pada halaman tersebut. */
-document.addEventListener("DOMContentLoaded", () => {
+jQuery(() => {
   updateAdminBadges();
   initAdminDashboard();
   initAdminProducts();

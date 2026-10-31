@@ -47,7 +47,7 @@ const MerchData = {
       description:
         "Kaos katun combed 24s dengan sablon logo THE SKIP di dada. Potongan regular fit, tahan sablon, dan nyaman untuk konser maupun harian.",
       cover: "images/products/tshirt-classic.jpg",
-      images: ["images/products/tshirt-classic.jpg", "images/products/tshirt-classic-back.svg"],
+      images: ["images/products/tshirt-classic.jpg", "images/products/tshirt-classic-back.jpg"],
       in_stock: true,
       featured: true,
       active: true,
@@ -67,8 +67,8 @@ const MerchData = {
       price: 320000,
       description:
         "Hoodie fleece 320 gsm dengan bordir logo di dada dan sablon jadwal Tour 2026 di punggung. Berat, hangat, dan dibuat untuk musim konser.",
-      cover: "images/products/hoodie-tour.svg",
-      images: ["images/products/hoodie-tour.svg"],
+      cover: "images/products/hoodie depan.jpg",
+      images: ["images/products/hoodie depan.jpg", "images/products/hodie belakang.jpg"],
       in_stock: true,
       featured: true,
       active: true,
@@ -87,8 +87,8 @@ const MerchData = {
       price: 95000,
       description:
         "Tiga pin enamel hard-enamel dengan pengunci karet: monogram THE SKIP, wordmark, dan simbol tur. Dikemas dalam kartu edisi terbatas.",
-      cover: "images/products/pin-set.svg",
-      images: ["images/products/pin-set.svg"],
+      cover: "images/products/Logo Enamel Pin Set.jpg",
+      images: ["images/products/Logo Enamel Pin Set.jpg"],
       in_stock: true,
       featured: true,
       active: true,
@@ -123,8 +123,8 @@ const MerchData = {
       price: 120000,
       description:
         "Produk dasar kaos untuk Custom Merch Studio. Pilih ukuran dan warna, unggah desain sendiri, lalu lihat preview mockup.",
-      cover: "images/products/tshirt-classic.jpg",
-      images: ["images/products/tshirt-classic.jpg"],
+      cover: "images/products/custom tshirt.jpg",
+      images: ["images/products/custom tshirt.jpg"],
       in_stock: true,
       featured: false,
       active: true,
@@ -144,8 +144,8 @@ const MerchData = {
       price: 220000,
       description:
         "Hoodie dasar untuk Custom Merch Studio dengan desain unggahan Anda. Bahan fleece lembut dengan sablon berkualitas.",
-      cover: "images/products/custom-base-hoodie.svg",
-      images: ["images/products/custom-base-hoodie.svg"],
+      cover: "images/products/custom hoodie.jpg",
+      images: ["images/products/custom hoodie.jpg"],
       in_stock: true,
       featured: false,
       active: true,
